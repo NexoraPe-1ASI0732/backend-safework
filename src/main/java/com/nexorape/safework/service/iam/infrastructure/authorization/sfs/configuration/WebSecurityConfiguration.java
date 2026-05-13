@@ -104,22 +104,19 @@ public class WebSecurityConfiguration {
      */
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http.cors(configurer -> configurer.configurationSource(_ -> {
+        http.cors(configurer -> configurer.configurationSource(request -> {
             var cors = new CorsConfiguration();
+
             cors.setAllowedOrigins(
-                    List.of("http://localhost:4200", "https://delightful-glacier-03ccd4010.1.azurestaticapps.net")); // Mejor
-                                                                                                                     // pon
-                                                                                                                     // tu
-                                                                                                                     // front
-                                                                                                                     // explícito
-                                                                                                                     // en
-                                                                                                                     // vez
-                                                                                                                     // de
-                                                                                                                     // "*"
-                                                                                                                     // para
-            // evitar problemas con credenciales
+                    List.of(
+                            "http://localhost:4200",
+                            "https://delightful-glacier-03ccd4010.1.azurestaticapps.net"
+                    )
+            );
+
             cors.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"));
             cors.setAllowedHeaders(List.of("*"));
+
             return cors;
         }));
         http.csrf(csrfConfigurer -> csrfConfigurer.disable())
