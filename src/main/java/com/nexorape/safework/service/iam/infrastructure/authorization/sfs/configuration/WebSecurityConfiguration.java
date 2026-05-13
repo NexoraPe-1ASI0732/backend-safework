@@ -110,7 +110,8 @@ public class WebSecurityConfiguration {
             cors.setAllowedOrigins(
                     List.of(
                             "http://localhost:4200",
-                            "https://delightful-glacier-03ccd4010.1.azurestaticapps.net"
+                            "https://delightful-glacier-03ccd4010.1.azurestaticapps.net",
+                            "https://safework-app-beta.vercel.app"
                     )
             );
 
