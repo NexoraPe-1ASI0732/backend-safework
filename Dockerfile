@@ -1,12 +1,20 @@
-# Java 25 JDK (OpenJDK Temurin)
-FROM eclipse-temurin:25-jdk
+# ===== STAGE 1: BUILD =====
+FROM maven:3.9.6-eclipse-temurin-17 AS build
 
 WORKDIR /app
 
-# Copy your JAR to the container
-COPY target/*.jar app.jar
+COPY pom.xml .
+COPY src ./src
+
+RUN mvn clean package -DskipTests
+
+# ===== STAGE 2: RUN =====
+FROM eclipse-temurin:23-jdk
+
+WORKDIR /app
+
+COPY --from=build /app/target/*.jar app.jar
 
 EXPOSE 8080
 
-# Run the Spring Boot application
-ENTRYPOINT ["java", "-jar", "/app/app.jar"]
+ENTRYPOINT ["java", "-jar", "app.jar"]
