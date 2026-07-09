@@ -65,7 +65,8 @@ public class WebSecurityConfiguration {
         cors.setAllowedOrigins(List.of(
                 "http://localhost:4200",
                 "https://safework-app-beta.vercel.app",
-                "https://safework-app-rosy.vercel.app"
+                "https://safework-app-rosy.vercel.app",
+                "https://safework-experimental.vercel.app"
         ));
         cors.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"));
         cors.setAllowedHeaders(List.of("Authorization", "Content-Type", "X-Requested-With", "Accept"));
